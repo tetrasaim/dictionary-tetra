@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elementa — מילון השפה</title>
+<title>Tetralongia — מילון השפה</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Serif+Hebrew:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -145,7 +145,7 @@
   }
   .card:hover { transform: translateY(-3px); }
 
-  .card-elementa {
+  .card-Tetralongia {
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.12rem; font-weight: 700;
     letter-spacing: 0.03em; line-height: 1.2;
@@ -208,7 +208,7 @@
 
   <header>
     <div class="logo-symbol">◈ Tristism Language Project ◈</div>
-    <h1>ELEMENTA</h1>
+    <h1>Tetralongia</h1>
     <div class="subtitle">מילון השפה הרשמי // Periodic Language Dictionary</div>
   </header>
 
@@ -218,7 +218,7 @@
     <div class="search-box">
       <span class="search-icon">⌕</span>
       <input type="text" id="search"
-             placeholder="חיפוש מילה בעברית או ב-Elementa..." autocomplete="off">
+             placeholder="חיפוש מילה בעברית או ב-Tetralongia..." autocomplete="off">
     </div>
   </div>
 
@@ -229,14 +229,14 @@
   <div class="stats" id="stats">טוען נתונים...</div>
 
   <div class="grid" id="grid">
-    <div id="loader">⟳ טוען מילון מ-elementa_words.json ...</div>
+    <div id="loader">⟳ טוען מילון מ-Tetralongia_words.json ...</div>
     <div id="no-results">לא נמצאו תוצאות // No results found</div>
   </div>
 
   <div class="legend" id="legend"></div>
 
   <footer>
-    Elementa // שפת הטריזם // מבוססת על הטבלה המחזורית<br>
+    Tetralongia // שפת הטריזם // מבוססת על הטבלה המחזורית<br>
     He · Li · Be · B · C · N · O · F · Ne · Na · Mg · Al · Si · P · S · Cl · Ar · K · Ca · Ti · Fe · Co · Ni · Cu · Zn
   </footer>
 
@@ -245,7 +245,7 @@
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 // שנה את הנתיב אם ה-JSON נמצא במקום אחר
-const JSON_URL = 'elementa_words.json';
+const JSON_URL = 'Tetralongia_words.json';
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let allWords    = [];
@@ -350,7 +350,7 @@ function render() {
   const filtered = allWords.filter(w => {
     const matchCat = activeFilter === 'all' || w.cat === activeFilter;
     const matchQ   = !query
-      || w.elementa.toLowerCase().includes(query)
+      || w.Tetralongia.toLowerCase().includes(query)
       || w.hebrew.includes(query)
       || (w.note && w.note.toLowerCase().includes(query));
     return matchCat && matchQ;
@@ -368,7 +368,7 @@ function render() {
     card.style.borderRightColor = color;
 
     card.innerHTML = `
-      <div class="card-elementa" style="color:${color}">${w.elementa}</div>
+      <div class="card-Tetralongia" style="color:${color}">${w.Tetralongia}</div>
       <div class="card-hebrew">${w.hebrew}</div>
       <div class="card-type">${cat.label}</div>
       ${w.note ? `<div class="card-note">${w.note}</div>` : ''}`;
