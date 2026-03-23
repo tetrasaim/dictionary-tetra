@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elementa — מילון השפה</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Serif+Hebrew:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060a10;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent1: #00d4ff;
+    --text: #c8dff5;
+    --text-dim: #5a7a99;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif Hebrew', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; top: -20%; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.05) 0%, transparent 68%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto; padding: 2rem;
+  }
+
+  /* HEADER */
+  header { text-align: center; padding: 4rem 0 3rem; }
+
+  .logo-symbol {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem; letter-spacing: 0.5em;
+    color: var(--accent1); opacity: 0.55; margin-bottom: 1rem;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.35} 50%{opacity:.7} }
+
+  h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, #00d4ff 0%, #0055ff 50%, #00d4ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; background-size: 200%;
+    animation: shimmer 5s linear infinite;
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  @keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+  .subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.88rem; color: var(--text-dim);
+    letter-spacing: 0.2em; margin-top: 0.75rem;
+  }
+
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+    opacity: 0.3; margin: 2.5rem 0;
+  }
+
+  /* SEARCH */
+  .search-wrap { display: flex; justify-content: center; margin-bottom: 2.5rem; }
+
+  .search-box { position: relative; width: 100%; max-width: 560px; }
+
+  .search-box input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 0.85rem 1.25rem 0.85rem 3rem;
+    color: var(--text); font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem; outline: none; direction: rtl;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .search-box input::placeholder { color: var(--text-dim); }
+  .search-box input:focus {
+    border-color: var(--accent1);
+    box-shadow: 0 0 22px rgba(0,212,255,0.13);
+  }
+  .search-icon {
+    position: absolute; left: 1rem; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim); font-size: 1.1rem; pointer-events: none;
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex; flex-wrap: wrap;
+    gap: 0.55rem; justify-content: center; margin-bottom: 2.5rem;
+  }
+  .filter-btn {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
+    padding: 0.38rem 0.95rem; border-radius: 3px; border: 1px solid;
+    cursor: pointer; background: transparent;
+    transition: background 0.18s, color 0.18s; letter-spacing: 0.04em;
+  }
+
+  /* STATS */
+  .stats {
+    text-align: center; font-family: 'Share Tech Mono', monospace;
+    font-size: 0.76rem; color: var(--text-dim);
+    margin-bottom: 1.5rem; letter-spacing: 0.05em;
+  }
+  .stats span { color: var(--accent1); font-weight: 700; }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1rem;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-right-width: 3px; border-radius: 6px;
+    padding: 1rem 1.1rem; display: flex;
+    flex-direction: column; gap: 0.3rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .card:hover { transform: translateY(-3px); }
+
+  .card-elementa {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.12rem; font-weight: 700;
+    letter-spacing: 0.03em; line-height: 1.2;
+  }
+  .card-hebrew { font-size: 1.05rem; color: var(--text); }
+  .card-type {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);
+  }
+  .card-note {
+    font-size: 0.76rem; color: var(--text-dim); line-height: 1.45;
+    border-top: 1px solid var(--border); padding-top: 0.4rem; margin-top: 0.2rem;
+  }
+
+  /* NO RESULTS */
+  #no-results {
+    display: none; grid-column: 1 / -1; text-align: center;
+    color: var(--text-dim); font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem; padding: 3rem;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    margin-top: 4rem; padding: 1.5rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.74rem; color: var(--text-dim);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* LOADER */
+  #loader {
+    grid-column: 1 / -1; text-align: center; padding: 5rem;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text-dim); letter-spacing: 0.2em; font-size: 0.85rem;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center; margin-top: 4rem; padding: 2rem;
+    color: var(--text-dim); font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    border-top: 1px solid var(--border); line-height: 2;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 1rem; }
+    h1 { font-size: 3rem; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo-symbol">◈ Tristism Language Project ◈</div>
+    <h1>ELEMENTA</h1>
+    <div class="subtitle">מילון השפה הרשמי // Periodic Language Dictionary</div>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="search"
+             placeholder="חיפוש מילה בעברית או ב-Elementa..." autocomplete="off">
+    </div>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn" data-cat="all">הכל</button>
+  </div>
+
+  <div class="stats" id="stats">טוען נתונים...</div>
+
+  <div class="grid" id="grid">
+    <div id="loader">⟳ טוען מילון מ-elementa_words.json ...</div>
+    <div id="no-results">לא נמצאו תוצאות // No results found</div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <footer>
+    Elementa // שפת הטריזם // מבוססת על הטבלה המחזורית<br>
+    He · Li · Be · B · C · N · O · F · Ne · Na · Mg · Al · Si · P · S · Cl · Ar · K · Ca · Ti · Fe · Co · Ni · Cu · Zn
+  </footer>
+
+</div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+// שנה את הנתיב אם ה-JSON נמצא במקום אחר
+const JSON_URL = 'elementa_words.json';
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let allWords    = [];
+let categories  = {};
+let activeFilter = 'all';
+
+// ─── LOAD DATA ────────────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const res = await fetch(JSON_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    allWords   = data.words;
+    categories = data.categories;
+
+    document.getElementById('loader').remove();
+    buildFilterBar();
+    buildLegend();
+    render();
+  } catch (err) {
+    const loader = document.getElementById('loader');
+    loader.textContent = `⚠ שגיאה בטעינת הנתונים: ${err.message}`;
+    loader.style.color = '#ff6b35';
+    console.error(err);
+  }
+}
+
+// ─── FILTER BAR ───────────────────────────────────────────────────────────────
+function buildFilterBar() {
+  const bar = document.getElementById('filter-bar');
+  const DIM = '#5a7a99';
+
+  // Style the pre-existing "all" button
+  const allBtn = bar.querySelector('[data-cat="all"]');
+  styleBtn(allBtn, DIM, true);
+
+  // Add one button per category
+  Object.entries(categories).forEach(([key, cat]) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.cat = key;
+    btn.textContent = cat.label;
+    styleBtn(btn, cat.color, false);
+    bar.appendChild(btn);
+  });
+
+  bar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+
+    // Deactivate all
+    bar.querySelectorAll('.filter-btn').forEach(b => {
+      const c = b.dataset.cat === 'all' ? DIM : (categories[b.dataset.cat]?.color ?? DIM);
+      styleBtn(b, c, false);
+    });
+
+    // Activate clicked
+    activeFilter = btn.dataset.cat;
+    const col = activeFilter === 'all' ? DIM : (categories[activeFilter]?.color ?? DIM);
+    styleBtn(btn, col, true);
+
+    render();
+  });
+}
+
+function styleBtn(btn, color, active) {
+  btn.style.borderColor = color;
+  if (active) {
+    btn.style.background = color;
+    btn.style.color = '#060a10';
+    btn.classList.add('active');
+  } else {
+    btn.style.background = 'transparent';
+    btn.style.color = color;
+    btn.classList.remove('active');
+  }
+}
+
+// ─── LEGEND ───────────────────────────────────────────────────────────────────
+function buildLegend() {
+  const legend = document.getElementById('legend');
+  Object.entries(categories).forEach(([, cat]) => {
+    legend.insertAdjacentHTML('beforeend', `
+      <div class="legend-item">
+        <div class="legend-dot" style="background:${cat.color}"></div>
+        ${cat.label}${cat.rule ? ' — ' + cat.rule : ''}
+      </div>`);
+  });
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render() {
+  const query  = document.getElementById('search').value.trim().toLowerCase();
+  const grid   = document.getElementById('grid');
+  const noRes  = document.getElementById('no-results');
+  const stats  = document.getElementById('stats');
+
+  // Remove old cards (keep #no-results)
+  grid.querySelectorAll('.card').forEach(c => c.remove());
+
+  const filtered = allWords.filter(w => {
+    const matchCat = activeFilter === 'all' || w.cat === activeFilter;
+    const matchQ   = !query
+      || w.elementa.toLowerCase().includes(query)
+      || w.hebrew.includes(query)
+      || (w.note && w.note.toLowerCase().includes(query));
+    return matchCat && matchQ;
+  });
+
+  noRes.style.display = filtered.length === 0 ? 'block' : 'none';
+  stats.innerHTML = `מציג <span>${filtered.length}</span> / ${allWords.length} מילים`;
+
+  filtered.forEach(w => {
+    const cat   = categories[w.cat] ?? { color: '#5a7a99', label: w.cat };
+    const color = cat.color;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.borderRightColor = color;
+
+    card.innerHTML = `
+      <div class="card-elementa" style="color:${color}">${w.elementa}</div>
+      <div class="card-hebrew">${w.hebrew}</div>
+      <div class="card-type">${cat.label}</div>
+      ${w.note ? `<div class="card-note">${w.note}</div>` : ''}`;
+
+    card.addEventListener('mouseenter', () => {
+      card.style.borderColor = color;
+      card.style.boxShadow   = `0 8px 30px ${color}25`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.borderColor      = '#1e3a5f';
+      card.style.borderRightColor = color;
+      card.style.boxShadow        = 'none';
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+// ─── SEARCH ───────────────────────────────────────────────────────────────────
+document.getElementById('search').addEventListener('input', render);
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>
