@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טבלה מחזורית מלאה</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        /* Periodic Table Grid - Force LTR for the elements layout */
+        .periodic-wrapper {
+            direction: ltr; 
+            display: grid;
+            grid-template-columns: repeat(18, minmax(0, 1fr));
+            grid-template-rows: repeat(10, minmax(0, 1fr));
+            gap: 4px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .element-card {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            padding: 2px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        .element-card:hover {
+            transform: scale(1.3);
+            z-index: 50;
+            filter: brightness(1.2);
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        .atomic-number {
+            font-size: 0.6rem;
+            position: absolute;
+            top: 1px;
+            left: 3px;
+        }
+
+        .symbol {
+            font-weight: 800;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .name {
+            font-size: 0.5rem;
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 90%;
+        }
+
+        /* Categories */
+        .diatomic-nonmetal { background-color: #00ff88; color: #000; }
+        .noble-gas { background-color: #c084fc; color: #000; }
+        .alkali-metal { background-color: #f87171; color: #000; }
+        .alkaline-earth-metal { background-color: #fb923c; color: #000; }
+        .metalloid { background-color: #2dd4bf; color: #000; }
+        .polyatomic-nonmetal { background-color: #4ade80; color: #000; }
+        .post-transition-metal { background-color: #94a3b8; color: #000; }
+        .transition-metal { background-color: #facc15; color: #000; }
+        .lanthanide { background-color: #ff99cc; color: #000; }
+        .actinide { background-color: #f472b6; color: #000; }
+        .unknown { background-color: #475569; color: #fff; }
+
+        /* Modal */
+        #info-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            z-index: 100;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid #334155;
+            direction: rtl;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 90;
+        }
+
+        .spacer { height: 20px; grid-column: span 18; }
+    </style>
+</head>
+<body>
+
+    <header class="text-center mb-6">
+        <h1 class="text-3xl font-bold">הטבלה המחזורית של היסודות</h1>
+        <p class="text-slate-400 text-sm">לחצו על יסוד למידע נוסף | תצוגה מלאה (118 יסודות)</p>
+    </header>
+
+    <div id="table-container" class="periodic-wrapper">
+        <!-- Elements will be generated here -->
+    </div>
+
+    <div id="overlay" onclick="closeModal()"></div>
+    <div id="info-modal">
+        <h2 id="m-name" class="text-3xl font-bold mb-1"></h2>
+        <p id="m-symbol" class="text-2xl text-blue-400 font-mono mb-4"></p>
+        <div class="space-y-2 border-t border-slate-700 pt-4">
+            <p><strong>מספר אטומי:</strong> <span id="m-num"></span></p>
+            <p><strong>מסה אטומית:</strong> <span id="m-mass"></span></p>
+            <p><strong>קטגוריה:</strong> <span id="m-cat"></span></p>
+        </div>
+        <button onclick="closeModal()" class="mt-6 w-full bg-blue-600 hover:bg-blue-500 py-2 rounded font-bold transition">סגור</button>
+    </div>
+
+    <script>
+        // Full 118 elements data
+        const elementsData = [
+            {n:1, s:"H", name:"מימן", cat:"diatomic-nonmetal", r:1, c:1, m:"1.008"},
+            {n:2, s:"He", name:"הליום", cat:"noble-gas", r:1, c:18, m:"4.0026"},
+            {n:3, s:"Li", name:"ליתיום", cat:"alkali-metal", r:2, c:1, m:"6.94"},
+            {n:4, s:"Be", name:"בריליום", cat:"alkaline-earth-metal", r:2, c:2, m:"9.0122"},
+            {n:5, s:"B", name:"בור", cat:"metalloid", r:2, c:13, m:"10.81"},
+            {n:6, s:"C", name:"פחמן", cat:"polyatomic-nonmetal", r:2, c:14, m:"12.011"},
+            {n:7, s:"N", name:"חנקן", cat:"diatomic-nonmetal", r:2, c:15, m:"14.007"},
+            {n:8, s:"O", name:"חמצן", cat:"diatomic-nonmetal", r:2, c:16, m:"15.999"},
+            {n:9, s:"F", name:"פלואור", cat:"diatomic-nonmetal", r:2, c:17, m:"18.998"},
+            {n:10, s:"Ne", name:"ניאון", cat:"noble-gas", r:2, c:18, m:"20.180"},
+            {n:11, s:"Na", name:"נתרן", cat:"alkali-metal", r:3, c:1, m:"22.990"},
+            {n:12, s:"Mg", name:"מגנזיום", cat:"alkaline-earth-metal", r:3, c:2, m:"24.305"},
+            {n:13, s:"Al", name:"אלומיניום", cat:"post-transition-metal", r:3, c:13, m:"26.982"},
+            {n:14, s:"Si", name:"צורן", cat:"metalloid", r:3, c:14, m:"28.085"},
+            {n:15, s:"P", name:"זרחן", cat:"polyatomic-nonmetal", r:3, c:15, m:"30.974"},
+            {n:16, s:"S", name:"גופרית", cat:"polyatomic-nonmetal", r:3, c:16, m:"32.06"},
+            {n:17, s:"Cl", name:"כלור", cat:"diatomic-nonmetal", r:3, c:17, m:"35.45"},
+            {n:18, s:"Ar", name:"ארגון", cat:"noble-gas", r:3, c:18, m:"39.948"},
+            {n:19, s:"K", name:"אשלגן", cat:"alkali-metal", r:4, c:1, m:"39.098"},
+            {n:20, s:"Ca", name:"סידן", cat:"alkaline-earth-metal", r:4, c:2, m:"40.078"},
+            {n:21, s:"Sc", name:"סקנדיום", cat:"transition-metal", r:4, c:3, m:"44.956"},
+            {n:22, s:"Ti", name:"טיטניום", cat:"transition-metal", r:4, c:4, m:"47.867"},
+            {n:23, s:"V", name:"ונדיום", cat:"transition-metal", r:4, c:5, m:"50.942"},
+            {n:24, s:"Cr", name:"כרום", cat:"transition-metal", r:4, c:6, m:"51.996"},
+            {n:25, s:"Mn", name:"מנגן", cat:"transition-metal", r:4, c:7, m:"54.938"},
+            {n:26, s:"Fe", name:"ברזל", cat:"transition-metal", r:4, c:8, m:"55.845"},
+            {n:27, s:"Co", name:"קובלט", cat:"transition-metal", r:4, c:9, m:"58.933"},
+            {n:28, s:"Ni", name:"ניקל", cat:"transition-metal", r:4, c:10, m:"58.693"},
+            {n:29, s:"Cu", name:"נחושת", cat:"transition-metal", r:4, c:11, m:"63.546"},
+            {n:30, s:"Zn", name:"אבץ", cat:"transition-metal", r:4, c:12, m:"65.38"},
+            {n:31, s:"Ga", name:"גליום", cat:"post-transition-metal", r:4, c:13, m:"69.723"},
+            {n:32, s:"Ge", name:"גרמניום", cat:"metalloid", r:4, c:14, m:"72.630"},
+            {n:33, s:"As", name:"ארסן", cat:"metalloid", r:4, c:15, m:"74.922"},
+            {n:34, s:"Se", name:"סלניום", cat:"polyatomic-nonmetal", r:4, c:16, m:"78.971"},
+            {n:35, s:"Br", name:"ברום", cat:"diatomic-nonmetal", r:4, c:17, m:"79.904"},
+            {n:36, s:"Kr", name:"קריפטון", cat:"noble-gas", r:4, c:18, m:"83.798"},
+            {n:37, s:"Rb", name:"רובידיום", cat:"alkali-metal", r:5, c:1, m:"85.468"},
+            {n:38, s:"Sr", name:"סטרונציום", cat:"alkaline-earth-metal", r:5, c:2, m:"87.62"},
+            {n:39, s:"Y", name:"איטריום", cat:"transition-metal", r:5, c:3, m:"88.906"},
+            {n:40, s:"Zr", name:"זירקוניום", cat:"transition-metal", r:5, c:4, m:"91.224"},
+            {n:41, s:"Nb", name:"ניאוביום", cat:"transition-metal", r:5, c:5, m:"92.906"},
+            {n:42, s:"Mo", name:"מוליבדן", cat:"transition-metal", r:5, c:6, m:"95.95"},
+            {n:43, s:"Tc", name:"טכנציום", cat:"transition-metal", r:5, c:7, m:"(98)"},
+            {n:44, s:"Ru", name:"רותניום", cat:"transition-metal", r:5, c:8, m:"101.07"},
+            {n:45, s:"Rh", name:"רודיום", cat:"transition-metal", r:5, c:9, m:"102.91"},
+            {n:46, s:"Pd", name:"פלדיום", cat:"transition-metal", r:5, c:10, m:"106.42"},
+            {n:47, s:"Ag", name:"כסף", cat:"transition-metal", r:5, c:11, m:"107.87"},
+            {n:48, s:"Cd", name:"קדמיום", cat:"transition-metal", r:5, c:12, m:"112.41"},
+            {n:49, s:"In", name:"אינדיום", cat:"post-transition-metal", r:5, c:13, m:"114.82"},
+            {n:50, s:"Sn", name:"בדיל", cat:"post-transition-metal", r:5, c:14, m:"118.71"},
+            {n:51, s:"Sb", name:"אנטימון", cat:"metalloid", r:5, c:15, m:"121.76"},
+            {n:52, s:"Te", name:"טלור", cat:"metalloid", r:5, c:16, m:"127.60"},
+            {n:53, s:"I", name:"יוד", cat:"diatomic-nonmetal", r:5, c:17, m:"126.90"},
+            {n:54, s:"Xe", name:"קסנון", cat:"noble-gas", r:5, c:18, m:"131.29"},
+            {n:55, s:"Cs", name:"צזיום", cat:"alkali-metal", r:6, c:1, m:"132.91"},
+            {n:56, s:"Ba", name:"בריום", cat:"alkaline-earth-metal", r:6, c:2, m:"137.33"},
+            {n:57, s:"La", name:"לנתן", cat:"lanthanide", r:9, c:4, m:"138.91"},
+            {n:58, s:"Ce", name:"צריום", cat:"lanthanide", r:9, c:5, m:"140.12"},
+            {n:59, s:"Pr", name:"פרסאודימיום", cat:"lanthanide", r:9, c:6, m:"140.91"},
+            {n:60, s:"Nd", name:"נאודימיום", cat:"lanthanide", r:9, c:7, m:"144.24"},
+            {n:61, s:"Pm", name:"פרומתיום", cat:"lanthanide", r:9, c:8, m:"(145)"},
+            {n:62, s:"Sm", name:"סמריום", cat:"lanthanide", r:9, c:9, m:"150.36"},
+            {n:63, s:"Eu", name:"אירופיום", cat:"lanthanide", r:9, c:10, m:"151.96"},
+            {n:64, s:"Gd", name:"גדוליניום", cat:"lanthanide", r:9, c:11, m:"157.25"},
+            {n:65, s:"Tb", name:"טרביום", cat:"lanthanide", r:9, c:12, m:"158.93"},
+            {n:66, s:"Dy", name:"דיספרוזיום", cat:"lanthanide", r:9, c:13, m:"162.50"},
+            {n:67, s:"Ho", name:"הולמיום", cat:"lanthanide", r:9, c:14, m:"164.93"},
+            {n:68, s:"Er", name:"ארביום", cat:"lanthanide", r:9, c:15, m:"167.26"},
+            {n:69, s:"Tm", name:"תוליום", cat:"lanthanide", r:9, c:16, m:"168.93"},
+            {n:70, s:"Yb", name:"איטרביום", cat:"lanthanide", r:9, c:17, m:"173.05"},
+            {n:71, s:"Lu", name:"לוטטיום", cat:"lanthanide", r:9, c:18, m:"174.97"},
+            {n:72, s:"Hf", name:"הפניום", cat:"transition-metal", r:6, c:4, m:"178.49"},
+            {n:73, s:"Ta", name:"טנטלום", cat:"transition-metal", r:6, c:5, m:"180.95"},
+            {n:74, s:"W", name:"טונגסטן", cat:"transition-metal", r:6, c:6, m:"183.84"},
+            {n:75, s:"Re", name:"רניום", cat:"transition-metal", r:6, c:7, m:"186.21"},
+            {n:76, s:"Os", name:"אוסמיום", cat:"transition-metal", r:6, c:8, m:"190.23"},
+            {n:77, s:"Ir", name:"אירידיום", cat:"transition-metal", r:6, c:9, m:"192.22"},
+            {n:78, s:"Pt", name:"פלטינה", cat:"transition-metal", r:6, c:10, m:"195.08"},
+            {n:79, s:"Au", name:"זהב", cat:"transition-metal", r:6, c:11, m:"196.97"},
+            {n:80, s:"Hg", name:"כספית", cat:"transition-metal", r:6, c:12, m:"200.59"},
+            {n:81, s:"Tl", name:"תליום", cat:"post-transition-metal", r:6, c:13, m:"204.38"},
+            {n:82, s:"Pb", name:"עופרת", cat:"post-transition-metal", r:6, c:14, m:"207.2"},
+            {n:83, s:"Bi", name:"ביסמוט", cat:"post-transition-metal", r:6, c:15, m:"208.98"},
+            {n:84, s:"Po", name:"פולוניום", cat:"post-transition-metal", r:6, c:16, m:"(209)"},
+            {n:85, s:"At", name:"אסטטין", cat:"metalloid", r:6, c:17, m:"(210)"},
+            {n:86, s:"Rn", name:"רדון", cat:"noble-gas", r:6, c:18, m:"(222)"},
+            {n:87, s:"Fr", name:"פרנציום", cat:"alkali-metal", r:7, c:1, m:"(223)"},
+            {n:88, s:"Ra", name:"רדיום", cat:"alkaline-earth-metal", r:7, c:2, m:"(226)"},
+            {n:89, s:"Ac", name:"אקטיניום", cat:"actinide", r:10, c:4, m:"(227)"},
+            {n:90, s:"Th", name:"תוריום", cat:"actinide", r:10, c:5, m:"232.04"},
+            {n:91, s:"Pa", name:"פרוטקטיניום", cat:"actinide", r:10, c:6, m:"231.04"},
+            {n:92, s:"U", name:"אורניום", cat:"actinide", r:10, c:7, m:"238.03"},
+            {n:93, s:"Np", name:"נפטוניום", cat:"actinide", r:10, c:8, m:"(237)"},
+            {n:94, s:"Pu", name:"פלוטוניום", cat:"actinide", r:10, c:9, m:"(244)"},
+            {n:95, s:"Am", name:"אמריציום", cat:"actinide", r:10, c:10, m:"(243)"},
+            {n:96, s:"Cm", name:"קוריום", cat:"actinide", r:10, c:11, m:"(247)"},
+            {n:97, s:"Bk", name:"ברקליום", cat:"actinide", r:10, c:12, m:"(247)"},
+            {n:98, s:"Cf", name:"קליפורניום", cat:"actinide", r:10, c:13, m:"(251)"},
+            {n:99, s:"Es", name:"איינשטייניום", cat:"actinide", r:10, c:14, m:"(252)"},
+            {n:100, s:"Fm", name:"פרמיום", cat:"actinide", r:10, c:15, m:"(257)"},
+            {n:101, s:"Md", name:"מנדלביום", cat:"actinide", r:10, c:16, m:"(258)"},
+            {n:102, s:"No", name:"נובליום", cat:"actinide", r:10, c:17, m:"(259)"},
+            {n:103, s:"Lr", name:"לורנציום", cat:"actinide", r:10, c:18, m:"(262)"},
+            {n:104, s:"Rf", name:"רתרפורדיום", cat:"transition-metal", r:7, c:4, m:"(267)"},
+            {n:105, s:"Db", name:"דובניום", cat:"transition-metal", r:7, c:5, m:"(268)"},
+            {n:106, s:"Sg", name:"סיבורגיום", cat:"transition-metal", r:7, c:6, m:"(269)"},
+            {n:107, s:"Bh", name:"בוריום", cat:"transition-metal", r:7, c:7, m:"(270)"},
+            {n:108, s:"Hs", name:"האסיום", cat:"transition-metal", r:7, c:8, m:"(269)"},
+            {n:109, s:"Mt", name:"מייטנריום", cat:"unknown", r:7, c:9, m:"(278)"},
+            {n:110, s:"Ds", name:"דרמשטטיום", cat:"unknown", r:7, c:10, m:"(281)"},
+            {n:111, s:"Rg", name:"רנטגניום", cat:"unknown", r:7, c:11, m:"(282)"},
+            {n:112, s:"Cn", name:"קופרניקיום", cat:"transition-metal", r:7, c:12, m:"(285)"},
+            {n:113, s:"Nh", name:"ניהוניום", cat:"unknown", r:7, c:13, m:"(286)"},
+            {n:114, s:"Fl", name:"פלרוביום", cat:"unknown", r:7, c:14, m:"(289)"},
+            {n:115, s:"Mc", name:"מוסקוביום", cat:"unknown", r:7, c:15, m:"(290)"},
+            {n:116, s:"Lv", name:"ליברמוריום", cat:"unknown", r:7, c:16, m:"(293)"},
+            {n:117, s:"Ts", name:"טנסין", cat:"unknown", r:7, c:17, m:"(294)"},
+            {n:118, s:"Og", name:"אוגאנסון", cat:"unknown", r:7, c:18, m:"(294)"}
+        ];
+
+        const container = document.getElementById('table-container');
+
+        function initTable() {
+            // Standard layout is 7 regular rows + 2 rows for lanthanides/actinides
+            const totalSlots = 10 * 18;
+            const grid = new Array(totalSlots).fill(null);
+
+            elementsData.forEach(el => {
+                const idx = (el.r - 1) * 18 + (el.c - 1);
+                grid[idx] = el;
+            });
+
+            grid.forEach((el, i) => {
+                const cell = document.createElement('div');
+                
+                // Add separator row before Lanthanides/Actinides
+                if (i === 7 * 18) {
+                   const spacer = document.createElement('div');
+                   spacer.className = 'spacer';
+                   container.appendChild(spacer);
+                }
+
+                if (el) {
+                    cell.className = `element-card ${el.cat}`;
+                    cell.innerHTML = `
+                        <div class="atomic-number">${el.n}</div>
+                        <div class="symbol">${el.s}</div>
+                        <div class="name">${el.name}</div>
+                    `;
+                    cell.onclick = () => openModal(el);
+                } else {
+                    cell.className = 'empty-cell';
+                }
+                container.appendChild(cell);
+            });
+        }
+
+        function openModal(el) {
+            document.getElementById('m-name').innerText = el.name;
+            document.getElementById('m-symbol').innerText = el.s;
+            document.getElementById('m-num').innerText = el.n;
+            document.getElementById('m-mass').innerText = el.m;
+            document.getElementById('m-cat').innerText = el.cat.replace(/-/g, ' ');
+            
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('info-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('info-modal').style.display = 'none';
+        }
+
+        initTable();
+    </script>
+</body>
+</html>
