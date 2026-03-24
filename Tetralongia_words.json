@@ -360,6 +360,44 @@
         "abbreviation": ""
       },
       {
+        "tetralongia": "auik",
+        "english": "Gold",
+        "translations": {
+          "he": "זהב",
+          "en": "Gold",
+          "es": "Oro",
+          "fr": "Or",
+          "de": "Gold",
+          "ru": "Золото",
+          "ja": "金",
+          "zh": "黄金",
+          "ar": "الذهب",
+          "it": "Oro",
+          "pt": "Ouro",
+          "ko": "금",
+          "nl": "Goud",
+          "pl": "Złoto",
+          "tr": "Altın",
+          "th": "ทอง",
+          "vi": "Vàng",
+          "id": "Emas",
+          "hi": "सोना",
+          "uk": "Золото",
+          "el": "Χρυσός",
+          "cs": "Zlato",
+          "sv": "Guld",
+          "da": "Guld",
+          "no": "Gull",
+          "fi": "Kulta",
+          "hu": "Arany",
+          "ro": "Aur",
+          "sm": "Auro",
+          "haw": "Gula"
+        },
+        "why": "Au (Aurum) - Transition metal from Period 6, Group 11 of the Periodic Table. Represents rarity, value, and immutability due to its non-reactive nature and precious status. The suffix '-ik' follows the noun formation pattern from Group 14 (Si, C, Ge, Sn, Pb) for constructed objects and precious substances.",
+        "abbreviation": "Au"
+      },
+      {
         "tetralongia": "norik",
         "english": "Light",
         "category": "elements",
@@ -1686,7 +1724,7 @@
     ],
     "adjectives": [
       {
-        "tetralongia": "budli",
+        "tetralongia": "budaf",
         "english": "Good",
         "translations": {
           "he": "טוב",
@@ -1800,7 +1838,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "gardli",
+        "tetralongia": "gardaf",
         "english": "Large",
         "translations": {
           "he": "גדול",
@@ -1914,7 +1952,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "falmorik",
+        "tetralongia": "falmoraf",
         "english": "Hot",
         "translations": {
           "he": "חם",
@@ -2908,45 +2946,6 @@
         },
         "why": "",
         "abbreviation": ""
-      },
-      {
-        "tetralongia": "auik",
-        "english": "Gold",
-        "category": "precious_metal",
-        "translations": {
-          "he": "זהב",
-          "en": "Gold",
-          "es": "Oro",
-          "fr": "Or",
-          "de": "Gold",
-          "ru": "Золото",
-          "ja": "金",
-          "zh": "黄金",
-          "ar": "الذهب",
-          "it": "Oro",
-          "pt": "Ouro",
-          "ko": "금",
-          "nl": "Goud",
-          "pl": "Złoto",
-          "tr": "Altın",
-          "th": "ทอง",
-          "vi": "Vàng",
-          "id": "Emas",
-          "hi": "सोना",
-          "uk": "Золото",
-          "el": "Χρυσός",
-          "cs": "Zlato",
-          "sv": "Guld",
-          "da": "Guld",
-          "no": "Gull",
-          "fi": "Kulta",
-          "hu": "Arany",
-          "ro": "Aur",
-          "sm": "Auro",
-          "haw": "Gula"
-        },
-        "why": "Au (Aurum) - Transition metal from Period 6, Group 11 of the Periodic Table. Represents rarity, value, and immutability due to its non-reactive nature and precious status. The suffix '-ik' follows the noun formation pattern from Group 14 (Si, C, Ge, Sn, Pb) for constructed objects and precious substances.",
-        "abbreviation": "Au"
       }
     ],
     "negation_general": [
