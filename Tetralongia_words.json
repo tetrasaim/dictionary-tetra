@@ -1800,7 +1800,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "nexli",
+        "tetralongia": "nexaf",
         "english": "New",
         "translations": {
           "he": "חדש",
@@ -1834,6 +1834,7 @@
           "sm": "Fou",
           "haw": "Hou"
         },
+        "Pronunciation": "nexaf",
         "why": "",
         "abbreviation": ""
       },
@@ -1876,7 +1877,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "minli",
+        "tetralongia": "minaf",
         "english": "Small",
         "translations": {
           "he": "קטן",
@@ -1910,11 +1911,12 @@
           "sm": "Itiiti",
           "haw": "Liʻiliʻi"
         },
+        "Pronunciation": "minaf",
         "why": "",
         "abbreviation": ""
       },
       {
-        "tetralongia": "silili",
+        "tetralongia": "siliaf",
         "english": "Quiet",
         "translations": {
           "he": "שקט",
@@ -1948,6 +1950,7 @@
           "sm": "Filemu",
           "haw": "Mahalo"
         },
+        "Pronunciation": "siliaf",
         "why": "",
         "abbreviation": ""
       },
@@ -1990,7 +1993,7 @@
         "abbreviation": "fal"
       },
       {
-        "tetralongia": "hholi",
+        "tetralongia": "hhoaf",
         "english": "Wet",
         "translations": {
           "he": "רטוב",
@@ -2024,11 +2027,12 @@
           "sm": "Susu",
           "haw": "Makaʻala"
         },
+        "Pronunciation": "hoaf",
         "why": "",
         "abbreviation": ""
       },
       {
-        "tetralongia": "norli",
+        "tetralongia": "noraf",
         "english": "Bright",
         "translations": {
           "he": "בהיר",
@@ -2066,7 +2070,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "murli",
+        "tetralongia": "muraf",
         "english": "Hard",
         "translations": {
           "he": "קשה",
@@ -2100,11 +2104,12 @@
           "sm": "Mamafa",
           "haw": "Paʻa"
         },
+        "Pronunciation": "muraf",
         "why": "",
-        "abbreviation": ""
+        "abbreviation": "mrl"
       },
       {
-        "tetralongia": "mololi",
+        "tetralongia": "moloaf",
         "english": "Unified",
         "translations": {
           "he": "מאוחד",
@@ -2138,6 +2143,7 @@
           "sm": "Faʻatasi",
           "haw": "Lokahi"
         },
+        "Pronunciation": "moloaf",
         "why": "",
         "abbreviation": ""
       }
