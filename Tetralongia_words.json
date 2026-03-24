@@ -3,7 +3,7 @@
     "title": "Tetralongia - Ultimate Consolidated Dictionary",
     "subtitle": "שפת הטריזם בכל העולם | A Language Based on the Periodic Table",
     "total_languages": 30,
-    "total_vocabulary_items": 75,
+    "total_vocabulary_items": 79,
     "date_created": "2026-03-23",
     "date_consolidated": "2026-03-23",
     "date_updated": "2026-03-24",
@@ -12,7 +12,9 @@
       "Samoan (sm)",
       "Hawaiian (haw)",
       "Mag (Very/Much/A lot) - Intensifier",
-      "NeKMag (A little/Not much) - Negation of intensity"
+      "NeKMag (A little/Not much) - Negation of intensity",
+      "Silicon (Sik), Oxygen (OOik), Sand (SiOOik) - Chemical element words",
+      "Glass (sokfalmagik) - Compound word from sand + heat + intensity"
     ]
   },
   "language_list": [
@@ -315,7 +317,7 @@
           "haw": "Honua"
         },
         "why": "אדמה בטמפרטורת החדר כמוצק - אין סיומת",
-        "abbreviation": "feik"
+        "abbreviation": ""
       },
       {
         "tetralongia": "falik",
@@ -432,7 +434,7 @@
           "haw": "Pohaku"
         },
         "why": "אבן בטמפרטורת החדר כמוצק - אין סיומת",
-        "abbreviation": "feik"
+        "abbreviation": ""
       },
       {
         "tetralongia": "talik",
@@ -471,7 +473,7 @@
           "haw": "Laʻau"
         },
         "why": "עץ בטמפרטורת החדר כמוצק - אין סיומת",
-        "abbreviation": "feik"
+        "abbreviation": ""
       },
       {
         "tetralongia": "venik",
@@ -510,7 +512,7 @@
           "haw": "Makani"
         },
         "why": "רוח בטמפרטורת החדר כגז - אין סיומת",
-        "abbreviation": "nnik"
+        "abbreviation": ""
       },
       {
         "tetralongia": "domik",
@@ -939,7 +941,7 @@
           "haw": "Wai"
         },
         "why": "מים בטמפרטורת החדר כנוזל - אין סיומת",
-        "abbreviation": "hoik"
+        "abbreviation": ""
       },
       {
         "tetralongia": "research",
@@ -985,7 +987,7 @@
         "english": "Solid",
         "category": "materials",
         "why": "fe = מוצק (על שם ברזל - Fe בטבלת היסודות)",
-        "abbreviation": "fe",
+        "abbreviation": "",
         "translations": {
           "he": "מוצק",
           "en": "Solid",
@@ -1024,7 +1026,7 @@
         "english": "Liquid",
         "category": "materials",
         "why": "ho = נוזל (HHO = H₂O, מים)",
-        "abbreviation": "ho",
+        "abbreviation": "",
         "translations": {
           "he": "נוזל",
           "en": "Liquid",
@@ -1063,7 +1065,7 @@
         "english": "Gas",
         "category": "materials",
         "why": "nn = גז (N₂ = חנקן בטבלת היסודות)",
-        "abbreviation": "nn",
+        "abbreviation": "",
         "translations": {
           "he": "גז",
           "en": "Gas",
@@ -1096,6 +1098,166 @@
           "sm": "Mumū",
           "haw": "ʻOpala"
         }
+      },
+      {
+        "tetralongia": "SiOOik",
+        "english": "Sand",
+        "category": "material",
+        "translations": {
+          "he": "חול",
+          "en": "Sand",
+          "es": "Arena",
+          "fr": "Sable",
+          "de": "Sand",
+          "ru": "Песок",
+          "ja": "砂",
+          "zh": "沙子",
+          "ar": "رمل",
+          "it": "Sabbia",
+          "pt": "Areia",
+          "ko": "모래",
+          "nl": "Zand",
+          "pl": "Piasek",
+          "tr": "Kum",
+          "th": "ทราย",
+          "vi": "Cát",
+          "id": "Pasir",
+          "hi": "बालू",
+          "uk": "Пісок",
+          "el": "Άμμος",
+          "cs": "Písek",
+          "sv": "Sand",
+          "da": "Sand",
+          "no": "Sand",
+          "fi": "Hiekka",
+          "hu": "Homok",
+          "ro": "Nisip",
+          "sm": "Oneone",
+          "haw": "ʻEne"
+        },
+        "why": "Si (Silicon) + OO (O₂ oxygen) + ik (noun suffix) - Silicon dioxide (SiO₂) is the main component of sand",
+        "abbreviation": "",
+        "related_words": [
+          "sokfalmagik (Glass - formed from heated sand)"
+        ]
+      },
+      {
+        "tetralongia": "Sik",
+        "english": "Silicon",
+        "category": "element",
+        "translations": {
+          "he": "סיליקון",
+          "en": "Silicon",
+          "es": "Silicio",
+          "fr": "Silicium",
+          "de": "Silizium",
+          "ru": "Кремний",
+          "ja": "ケイ素",
+          "zh": "硅",
+          "ar": "السيليكون",
+          "it": "Silicio",
+          "pt": "Silício",
+          "ko": "규소",
+          "nl": "Silicium",
+          "pl": "Krzem",
+          "tr": "Silisyum",
+          "th": "ซิลิกอน",
+          "vi": "Silic",
+          "id": "Silikon",
+          "hi": "सिलिकॉन",
+          "uk": "Кремній",
+          "el": "Πυρίτιο",
+          "cs": "Křemík",
+          "sv": "Kisel",
+          "da": "Silicium",
+          "no": "Silisium",
+          "fi": "Pii",
+          "hu": "Szilícium",
+          "ro": "Siliciu",
+          "sm": "Silika",
+          "haw": "Kikoʻolio"
+        },
+        "why": "Si (Silicon from periodic table) + ik (noun suffix Group 14) - Silicon is element 14, Group 14 creates ordered structures",
+        "abbreviation": ""
+      },
+      {
+        "tetralongia": "OOik",
+        "english": "Oxygen",
+        "category": "element",
+        "translations": {
+          "he": "חמצן",
+          "en": "Oxygen",
+          "es": "Oxígeno",
+          "fr": "Oxygène",
+          "de": "Sauerstoff",
+          "ru": "Кислород",
+          "ja": "酸素",
+          "zh": "氧气",
+          "ar": "الأكسجين",
+          "it": "Ossigeno",
+          "pt": "Oxigênio",
+          "ko": "산소",
+          "nl": "Zuurstof",
+          "pl": "Tlen",
+          "tr": "Oksijen",
+          "th": "ออกซิเจน",
+          "vi": "Oxy",
+          "id": "Oksigen",
+          "hi": "ऑक्सीजन",
+          "uk": "Кисень",
+          "el": "Οξυγόνο",
+          "cs": "Kyslík",
+          "sv": "Syre",
+          "da": "Ilt",
+          "no": "Oksygen",
+          "fi": "Happi",
+          "hu": "Oxigén",
+          "ro": "Oxigen",
+          "sm": "Okesene",
+          "haw": "Okesene"
+        },
+        "why": "OO (O₂ - oxygen as it naturally occurs as diatomic molecule) + ik (noun suffix) - Represented as double O to show O₂ molecular form",
+        "abbreviation": "OO"
+      },
+      {
+        "tetralongia": "sokfalmgik",
+        "english": "Glass",
+        "category": "material",
+        "translations": {
+          "he": "זכוכית",
+          "en": "Glass",
+          "es": "Vidrio",
+          "fr": "Verre",
+          "de": "Glas",
+          "ru": "Стекло",
+          "ja": "ガラス",
+          "zh": "玻璃",
+          "ar": "الزجاج",
+          "it": "Vetro",
+          "pt": "Vidro",
+          "ko": "유리",
+          "nl": "Glas",
+          "pl": "Szkło",
+          "tr": "Cam",
+          "th": "แก้ว",
+          "vi": "Thủy tinh",
+          "id": "Kaca",
+          "hi": "कांच",
+          "uk": "Скло",
+          "el": "Γυαλί",
+          "cs": "Sklo",
+          "sv": "Glas",
+          "da": "Glas",
+          "no": "Glass",
+          "fi": "Lasi",
+          "hu": "Üveg",
+          "ro": "Sticlă",
+          "sm": "Alaisa",
+          "haw": "Aniani"
+        },
+        "why": "sok (abbreviation of SiOOik - sand/silicon dioxide) + fal (abbreviation of heat) + mag (Very/Much - intensifier from Mg magnesium) = Sand + Much heat = Glass (formed by melting sand at high temperatures)",
+        "abbreviation": "",
+        "related_word": "SiOOik (Sand - primary ingredient)"
       }
     ],
     "verbs": [
@@ -2822,9 +2984,9 @@
     "note_7": "The complete vocabulary now covers 70 items across 30 major world languages plus sign language considerations"
   },
   "statistics": {
-    "total_words": 75,
+    "total_words": 79,
     "total_languages": 30,
-    "noun_count": 23,
+    "noun_count": 27,
     "verb_count": 10,
     "adjective_count": 10,
     "adverb_count": 4,
@@ -2834,7 +2996,8 @@
     "negation_count": 1,
     "intensifier_count": 2,
     "native_speakers_covered": "5.6+ billion people",
-    "coverage": "Complete consolidated edition with all vocabulary fully translated"
+    "coverage": "Complete consolidated edition with all vocabulary fully translated",
+    "element_count": 3
   },
   "file_consolidation_metadata": {
     "consolidation_date": "2026-03-23",
