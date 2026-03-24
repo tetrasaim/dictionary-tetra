@@ -2,15 +2,18 @@
   "meta": {
     "title": "Tetralongia - Ultimate Consolidated Dictionary",
     "subtitle": "שפת הטריזם בכל העולם | A Language Based on the Periodic Table",
-    "version": "4.0 - Ultimate Consolidated Edition",
+    "version": "4.1 - Ultimate Consolidated Edition with Intensifiers",
     "total_languages": 30,
-    "total_vocabulary_items": 73,
+    "total_vocabulary_items": 75,
     "date_created": "2026-03-23",
     "date_consolidated": "2026-03-23",
-    "description": "Complete consolidated translation of Tetralongia (Treizism) - a constructed language based on the periodic table of elements - into 30 major world languages including newly added Samoan and Hawaiian - Including base material state definitions (Solid/Liquid/Gas)",
+    "date_updated": "2026-03-24",
+    "description": "Complete consolidated translation of Tetralongia (Treizism) - a constructed language based on the periodic table of elements - into 30 major world languages including newly added Samoan and Hawaiian - Including base material state definitions (Solid/Liquid/Gas) and intensity modifiers (Mag/NeKMag)",
     "new_additions": [
       "Samoan (sm)",
-      "Hawaiian (haw)"
+      "Hawaiian (haw)",
+      "Mag (Very/Much/A lot) - Intensifier",
+      "NeKMag (A little/Not much) - Negation of intensity"
     ]
   },
   "language_list": [
@@ -1670,7 +1673,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "falmor",
+        "tetralongia": "falmorik",
         "english": "Hot",
         "translations": {
           "he": "חם",
@@ -2705,6 +2708,86 @@
         "why": "",
         "abbreviation": ""
       }
+    ],
+    "intensifiers_diminishers": [
+      {
+        "tetralongia": "Mag",
+        "english": "Very/Much/A lot",
+        "category": "intensifier",
+        "translations": {
+          "he": "מאוד / יותר",
+          "en": "Very/Much/A lot",
+          "es": "Muy/Mucho",
+          "fr": "Très/Beaucoup",
+          "de": "Sehr/Viel",
+          "ru": "Очень/Много",
+          "ja": "とても/たくさん",
+          "zh": "很/多",
+          "ar": "كثيرا/جدا",
+          "it": "Molto/Assai",
+          "pt": "Muito/Bastante",
+          "ko": "매우/많이",
+          "nl": "Zeer/Veel",
+          "pl": "Bardzo/Dużo",
+          "tr": "Çok/Bir çok",
+          "th": "มาก/เยอะ",
+          "vi": "Rất/Nhiều",
+          "id": "Sangat/Banyak",
+          "hi": "बहुत/अधिक",
+          "uk": "Дуже/Багато",
+          "el": "Πολύ/Πάρα",
+          "cs": "Velmi/Moc",
+          "sv": "Mycket/Många",
+          "da": "Meget/Mange",
+          "no": "Veldig/Mange",
+          "fi": "Hyvin/Paljon",
+          "hu": "Nagyon/Sok",
+          "ro": "Foarte/Mult",
+          "sm": "Tele/Maualalo",
+          "haw": "Nui/Palilai"
+        },
+        "why": "Magnesium (Mg) - highly reactive and energetic element, represents intensity and abundance",
+        "abbreviation": "Mg"
+      },
+      {
+        "tetralongia": "NeKMag",
+        "english": "A little/Few/Not much (Negation of much)",
+        "category": "diminisher",
+        "translations": {
+          "he": "מעט / קצת / לא הרבה",
+          "en": "A little/Few/Not much",
+          "es": "Poco/Un poco/No mucho",
+          "fr": "Un peu/Peu/Pas beaucoup",
+          "de": "Ein wenig/Wenig/Nicht viel",
+          "ru": "Немного/Мало/Не много",
+          "ja": "少し/少ない/あまり",
+          "zh": "一点/少/不多",
+          "ar": "قليلا/قليل/ليس كثيرا",
+          "it": "Un po'/Poco/Non molto",
+          "pt": "Um pouco/Pouco/Não muito",
+          "ko": "조금/적은/많지 않은",
+          "nl": "Een beetje/Weinig/Niet veel",
+          "pl": "Trochę/Mało/Nie dużo",
+          "tr": "Biraz/Az/Çok değil",
+          "th": "นิดหน่อย/น้อย/ไม่มาก",
+          "vi": "Một chút/Ít/Không nhiều",
+          "id": "Sedikit/Tidak banyak",
+          "hi": "थोड़ा/कम/ज्यादा नहीं",
+          "uk": "Трохи/Мало/Не багато",
+          "el": "Λίγο/Αρκετά/Όχι πολύ",
+          "cs": "Trochu/Málo/Není moc",
+          "sv": "En liten/Lite/Inte mycket",
+          "da": "Lidt/Få/Ikke meget",
+          "no": "Litt/Få/Ikke mye",
+          "fi": "Vähän/Vähä/Ei paljon",
+          "hu": "Kevés/Egy kicsit/Nem sok",
+          "ro": "Puțin/Puțin/Nu mult",
+          "sm": "Itiiti/Vaitiiti",
+          "haw": "Liʻiliʻi/ʻAʻole nui"
+        },
+        "why": "Negation (NeK) + Magnesium (Mag) = Not much/A little, representing the opposite of intensity and abundance",
+        "abbreviation": "NeKMg"
+      }
     ]
   },
   "grammar_rules": {
@@ -2740,7 +2823,7 @@
     "note_7": "The complete vocabulary now covers 70 items across 30 major world languages plus sign language considerations"
   },
   "statistics": {
-    "total_words": 73,
+    "total_words": 75,
     "total_languages": 30,
     "noun_count": 23,
     "verb_count": 10,
@@ -2750,6 +2833,7 @@
     "question_count": 6,
     "greeting_count": 4,
     "negation_count": 1,
+    "intensifier_count": 2,
     "native_speakers_covered": "5.6+ billion people",
     "coverage": "Complete consolidated edition with all vocabulary fully translated"
   },
