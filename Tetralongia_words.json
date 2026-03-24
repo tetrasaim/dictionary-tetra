@@ -554,7 +554,7 @@
         "why": "Combination of the main elements in air",
         "abbreviation": ""
       },
-            {
+      {
         "tetralongia": "KuLiK",
 				"english": "electricity",
 				"category": "materials",
@@ -592,6 +592,46 @@
 			},
         "Pronunciation": "KuLiK",
         "why": "ku uses to transfer current between cause and effect",
+        "abbreviation": ""
+      },
+            {
+        "tetralongia": "Kulnorik",
+				"english": "lamp",
+				"category": "materials",
+				"translations": {
+					"he": "מנורה",
+					"en": "Lamp",
+					"es": "Lámpara",
+					"fr": "Lampe",
+					"de": "Lampe",
+					"ru": "Лампа",
+					"ja": "ランプ",
+					"zh": "灯",
+					"ar": "مصباح",
+					"it": "Lampada",
+					"pt": "Lâmpada",
+					"ko": "램프",
+					"nl": "Lamp",
+					"pl": "Lampa",
+					"tr": "Lamba",
+					"th": "ตะเกียง",
+					"vi": "Đèn",
+					"id": "Lampu",
+					"hi": "दीपक",
+					"uk": "Лампа",
+					"el": "Λάμπα",
+					"cs": "Lampa",
+					"sv": "Lampa",
+					"da": "Lampe",
+					"no": "Lampe",
+					"fi": "Lamppu",
+					"hu": "Lámpa",
+					"ro": "Lampă",
+					"sm": "Moli",
+					"haw": "Kukui"
+			},
+        "Pronunciation": "Kulnorik",
+        "why": "Connection of light and electricity",
         "abbreviation": ""
       },
       {
