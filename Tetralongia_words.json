@@ -980,6 +980,7 @@
           "sm": "Vai",
           "haw": "Wai"
         },
+        "Pronunciation": "hoik",
         "why": "מים בטמפרטורת החדר כנוזל - אין סיומת",
         "abbreviation": ""
       },
@@ -1302,7 +1303,7 @@
     ],
     "verbs": [
       {
-        "tetralongia": "savaf",
+        "tetralongia": "savli",
         "english": "To walk",
         "translations": {
           "he": "ללכת",
@@ -1340,7 +1341,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "noraf",
+        "tetralongia": "norli",
         "english": "To see",
         "translations": {
           "he": "לראות",
@@ -1378,7 +1379,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "melaf",
+        "tetralongia": "meli",
         "english": "To speak",
         "translations": {
           "he": "לדבר",
@@ -1416,7 +1417,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "lunaf",
+        "tetralongia": "lunli",
         "english": "To think",
         "translations": {
           "he": "לחשוב",
@@ -1454,7 +1455,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "taraf",
+        "tetralongia": "tarli",
         "english": "To eat",
         "translations": {
           "he": "לאכול",
@@ -1492,7 +1493,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "hhof",
+        "tetralongia": "hholi",
         "english": "To drink",
         "translations": {
           "he": "לשתות",
@@ -1526,11 +1527,12 @@
           "sm": "Ininu",
           "haw": "Inu"
         },
+        "Pronunciation": "holi",
         "why": "",
         "abbreviation": ""
       },
       {
-        "tetralongia": "falaf",
+        "tetralongia": "fali",
         "english": "To burn",
         "translations": {
           "he": "לבעור",
@@ -1568,7 +1570,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "zolaf",
+        "tetralongia": "zoli",
         "english": "To live",
         "translations": {
           "he": "לחיות",
@@ -1606,7 +1608,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "keraf",
+        "tetralongia": "kerli",
         "english": "To create",
         "translations": {
           "he": "ליצור",
@@ -1644,7 +1646,7 @@
         "abbreviation": ""
       },
       {
-        "tetralongia": "venaf",
+        "tetralongia": "venli",
         "english": "To fly",
         "translations": {
           "he": "לעוף",
