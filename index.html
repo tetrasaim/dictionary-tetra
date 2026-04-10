@@ -215,6 +215,11 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.78rem; color: var(--text-dim); letter-spacing: 0.05em;
   }
+  .card-pronunciation {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem; color: var(--accent1); opacity: 0.55;
+    letter-spacing: 0.05em;
+  }
   .card-type {
     font-family: 'Share Tech Mono', monospace; font-size: 0.6rem;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);
@@ -319,6 +324,14 @@
     background: rgba(0,212,255,0.1);
     box-shadow: 0 0 12px rgba(0,212,255,0.15);
   }
+  .card-speak-btn {
+    background: none; border: none; padding: 0;
+    color: var(--accent1); opacity: 0.5; font-size: 0.75rem;
+    cursor: pointer; line-height: 1;
+    transition: opacity 0.15s;
+    display: inline-block; vertical-align: middle; margin-right: 0.3rem;
+  }
+  .card-speak-btn:hover { opacity: 1; }
 
   /* NO RESULTS */
   #no-results {
@@ -650,10 +663,26 @@ function render() {
 
     card.innerHTML = `
       <div class="card-tetralingua" style="color:${color}">${w.tetralingua}</div>
+      ${w.pronunciation ? `<div class="card-pronunciation">/${w.pronunciation}/</div>` : ''}
       <div class="card-primary">${primaryTrans}</div>
       ${activeLang !== 'en' ? `<div class="card-english">${w.english}</div>` : ''}
       <div class="card-type">${cat.label}${w.subCat ? ' · ' + w.subCat : ''}</div>
       ${extraHtml ? `<div class="card-extra-langs">${extraHtml}</div>` : ''}`;
+
+    // כפתור הקראה בכרטיס
+    const speakText = w.pronunciation || w.tetralingua;
+    const cardSpeakBtn = document.createElement('button');
+    cardSpeakBtn.className = 'card-speak-btn';
+    cardSpeakBtn.title = `הקראה: ${speakText}`;
+    cardSpeakBtn.textContent = '▶';
+    cardSpeakBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const utt = new SpeechSynthesisUtterance(speakText);
+      utt.lang = 'en-US';
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utt);
+    });
+    card.querySelector('.card-tetralingua').prepend(cardSpeakBtn);
 
     card.addEventListener('mouseenter', () => {
       card.style.borderColor = color;
@@ -681,7 +710,8 @@ function openModal(w, color) {
     ${w.subCat ? `<span class="modal-badge" style="border-color:${color};color:${color}">${w.subCat}</span>` : ''}
   `;
 
-  document.getElementById('modal-langs-grid').innerHTML = languageList.map(l => {
+  const langsGrid = document.getElementById('modal-langs-grid');
+  langsGrid.innerHTML = languageList.map(l => {
     const val = w.translations[l.code];
     if (!val) return '';
     return `
@@ -692,16 +722,14 @@ function openModal(w, color) {
       </div>`;
   }).join('');
 
-  // meta row: speak button, why, abbreviation
+  // meta row: speak button, abbreviation, why
   const metaRow = document.getElementById('modal-meta-row');
   metaRow.innerHTML = '';
 
-  // speak button
   const speakText = w.pronunciation || w.tetralingua;
   const speakBtn = document.createElement('button');
   speakBtn.className = 'modal-speak-btn';
   speakBtn.innerHTML = '▶ הקראה';
-  speakBtn.title = speakText;
   speakBtn.addEventListener('click', () => {
     const utt = new SpeechSynthesisUtterance(speakText);
     utt.lang = 'en-US';
@@ -710,7 +738,6 @@ function openModal(w, color) {
   });
   metaRow.appendChild(speakBtn);
 
-  // abbreviation
   if (w.abbreviation) {
     const abbr = document.createElement('div');
     abbr.className = 'modal-abbreviation';
@@ -718,7 +745,6 @@ function openModal(w, color) {
     metaRow.appendChild(abbr);
   }
 
-  // why
   if (w.why) {
     const why = document.createElement('div');
     why.className = 'modal-why';
