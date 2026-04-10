@@ -505,7 +505,7 @@ async function loadData() {
           translations:  w.translations || {},
           why:           w.why || '',
           abbreviation:  w.abbreviation || '',
-          pronunciation: w.Pronunciation || '',
+          pronunciation: w.Pronunciation || w.pronunciation || '',
         });
       });
     });
